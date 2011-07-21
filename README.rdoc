@@ -1,0 +1,29 @@
+= SaySo API Client
+
+Ruby gem to use the full SaySo API.
+Currently the SaySo API is closed and for partner use only. To request an API
+key please contact us at team@truvolabs.com.
+
+For more info see:
+
+* <b>The origin of this code:</b> https://github.com/truvolabs/sayso-api-client
+* <b>SaySo:</b> https://www.sayso.com
+
+== Install
+
+Use the gem.
+
+  gem install sayso-api-client
+
+== Usage
+
+  require 'sayso'
+  sayso = Sayso.new(:)
+
+== TODO
+
+* Tests
+
+Please feel free to contribute and send me a pull request via Github!
+
+Copyright (c) 2011 Joost Hietbrink, released under the MIT license
