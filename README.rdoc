@@ -9,6 +9,8 @@ For more info see:
 * <b>The origin of this code:</b> https://github.com/truvolabs/sayso-api-client
 * <b>SaySo:</b> https://www.sayso.com
 
+Please read the full API documentation before using!
+
 == Install
 
 Use the gem.
@@ -18,7 +20,12 @@ Use the gem.
 == Usage
 
   require 'sayso'
-  sayso = Sayso.new(:)
+  sayso = Sayso.new(:consumer_key => 'your_key', :consumer_secret => 'your_secret')
+  sayso.get("/places/search?what=restaurant&where=antwerpen")
+  sayso.get("/places/search", :what => 'restaurant', :where => 'antwerpen')
+  sayso.authorize_url # go here (=> "http://api.sayso.com/api1/oauth/authorize?oauth_token=some_token_hash")
+  sayso.authorize_access_token('verifier')
+  sayso.get("/users/current")
 
 == TODO
 
