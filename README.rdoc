@@ -17,6 +17,10 @@ Use the gem.
 
   gem install sayso-api-client
 
+Use in your Gemfile:
+
+  gem 'sayso-api-client', :require => 'sayso'
+
 == Usage
 
   require 'sayso'
