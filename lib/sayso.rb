@@ -17,7 +17,7 @@ require 'active_support/all'
 class Sayso
 
   attr_accessor :version, :consumer_key, :consumer_secret, :base_url, :callback, :get_params
-  attr_reader :access_token, :request_token, :response
+  attr_reader :access_token, :request_token, :response, :consumer
 
   # Example:
   #  Sayso.new(:consumer_key => 'your_key', :consumer_secret => 'your_secret', :language => 'nl-NL')
@@ -37,7 +37,7 @@ class Sayso
   end
 
   def initialize_access_token(force = false)
-    return @access_token if force || @access_token.nil?
+    return @access_token if force || !@access_token.nil?
     @consumer = OAuth::Consumer.new(self.consumer_key, self.consumer_secret, {
       :site => self.base_url,
       :request_token_path => "/api#{self.version}/oauth/request_token",
