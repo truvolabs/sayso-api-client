@@ -3,7 +3,8 @@ require 'crack'
 require 'active_support/all'
 #
 # Example usage:
-#  sayso = Sayso.new(:consumer_key => 'your_key', :consumer_secret => 'your_secret', :callback = 'http://localhost:3000')
+#  sayso = Sayso.new(:consumer_key => 'your_key', :consumer_secret => 'your_secret', :callback => 'http://localhost:3000')
+#  sayso = Sayso.new(:consumer_key => sayso_key, :consumer_secret => sayso_secret, :callback => 'http://localhost:3000')
 #  sayso.get("/places/search?what=restaurant&where=antwerpen")
 #  sayso.get("/places/search", :what => 'restaurant', :where => 'antwerpen')
 #  sayso.authorize_url # go here (=> "http://api.sayso.com/api1/oauth/authorize?oauth_token=some_token_hash")
@@ -71,6 +72,7 @@ class Sayso
     path = "/api#{self.version}#{path}"
     path += "?#{params.to_query}" unless params.blank?
     @response = @access_token.get(path)
+    raise StandardError, "Got non 200 HTTP response from SaySo" if not @response.code == '200'
     result = Crack::XML.parse(@response.body)
     HashWithIndifferentAccess.new(result)
   end
