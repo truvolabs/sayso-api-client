@@ -66,9 +66,13 @@ class Sayso
   # Gets from the Sayso API and returns the parsed XML.
   # Access the unparsed response using the response method.
   # Examples:
-  #  get("/places/search?what=restaurant&where=antwerpen")
+  #  get("/places/search?what=restaurant&where=antwerpen&base_country=BE")
   #  get("/places/search", :what => 'restaurant', :where => 'antwerpen', :base_country => 'BE')
   def get(path, params = {})
+    params = params.with_indifferent_access
+    # We should always include a base_country in searches.
+    raise ArgumentError, "You should add a :country parameter to a search request to prevent weird/incorrect replies." if path =~ /^\/places\/search/ && !(params.include?(:base_country) || path =~ /(\?|&)base\_country\=/)
+
     path = "/api#{self.version}#{path}"
     path += "?#{params.to_query}" unless params.blank?
     @response = @access_token.get(path)
